@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api aplication</title>
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/components/principal-buttons.css"></link>
+    <link rel="stylesheet" href="../static/css/components/text-input.css"> 
+    <link rel="stylesheet" href="../static/css/components/close-btn.css">
+    <link rel="stylesheet" href="../static/css/components/options-user.css">
+</head>
+<body> 
+    <div class="backdrop"></div>
+      <!--Quando for aberto as configurações do usuário, cobre-se a página com o o backdrop-->
+    <h1 class="title">API aplication</h1>
+
+    <div class="wrapper-container">
+        <div class="users-container">
+            {% for user in users %}
+            <div class="user">
+                <div class="user-pic">
+                    <img src="{{users[user]['avatar']}}"> 
+                </div>
+                <div class="user-info">
+                    <p class="name">{{users[user]['name']}}</p>
+                    <p class="email">{{users[user]['email']}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="btn btn-add">Add new user</button>
+
+
+        <div class="user-register__box">
+            <a class="close-button" onclick="close_()"></a>
+            <form action="{{ url_for ('add_newUser') }}" method="post" class="user-register__form">
+                <label for="inp-name" class="inp">
+                    <input class='input-text' type="text" id="inp-name" placeholder="&nbsp" name="name" autocomplete="off">
+                    <span class="label">name</span>
+                </label>
+
+                <label for="inp-email" class="inp">
+                    <input class='input-text' type="email" id="inp-email" placeholder="&nbsp" name="email" autocomplete="off">
+                    <span class="label">email</span>
+                </label>
+
+                <label for="inp-avatar" class="inp">
+                    <input class='input-text'type="url" id="inp-avatar" placeholder="&nbsp" name="avatar" autocomplete="off">
+                    <span class="label">avatar</span>
+                </label>
+
+                <input class="btn btn-submit" type="submit">
+            </form>
+        </div>
+    </div>
+  
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src= "{{ url_for('static', filename='js/option-user.js') }}" ></script>
+<script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!--Send data to python script: -->
+<script>
+    var name, email, avatar, id;  
+     
+    function changeUser(index) {
+    //dado do usuário a ser alterado:
+        getTargetData(index, 'change');
+
+        const dict = {name, email, avatar, id}
+        const dict_json = JSON.stringify(dict);
+        console.log(dict_json)
+
+        let register__box = document.querySelector('.user-register__box');
+
+        let userRegister__form = document.querySelector('.user-register__form');
+        resgister__box.style.display = 'flex';
+
+        sendDataToPython("/change", dict_json);
+        userRegister__form.setAttribute('action', "{{ url_for('change') }}")
+      //o form é reutilizado, apenas alterando o local para onde a url aponta, nesse muda-se para a função change_user
+      //o dado enviado pelo action são as informações do novo usuário.     
+    }
+
+    function deleteUser (index) {
+        //A função é acionada depois do clique no span_delete (variável que está na classe optionUser do arquivo option-user.js)
+        getTargetData(index);
+
+        const dict = {name, email, avatar, id}
+        const dict_json = JSON.stringify(dict);
+        
+        sendDataToPython("/delete", dict_json) 
+    } 
+
+    function getTargetData(target, method) {
+        let email_list = document.querySelectorAll('.email');
+        let btnDelete_user = document.querySelector('.option-delete');
+        "{% for user in users %}"
+            //é preciso percorrer a lista de usuários para conseguir 'pegar' aquele a ser deletado. 
+            if ("{{users[user]['email']}}" == email_list[target].innerText) {
+                name = "{{users[user]['name']}}";
+                email = "{{users[user]['email']}}";
+                avatar = "{{users[user]['avatar']}}";
+                id = "{{users[user]['id']}}";
+                 
+                if(method == 'change') {
+                    //caso o método for de alterar os dados, mantém se o dado do usuário a ser alterado no input, para deixar a alteração mais intuitiva.
+                    document.getElementById('inp-name').value = name;
+                    document.getElementById('inp-email').value = email;
+                    document.getElementById('inp-avatar').value = avatar;
+                }
+            }
+        "{% endfor %}"
+    }
+
+    function sendDataToPython(route, dict) {
+        $.ajax({
+            //O ajax vai enviar o json das variáveis à função do python, por meio da rota '/delete'
+            url: route,
+            type: "POST",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(dict),
+
+            error: setTimeout(() => {
+                //Aqui o conceito tá uma merda... Eu envio os dados com o post ao flask. Isso da certo, mas o ajax do jquery retorna um erro, então eu só consido dar reaload por meio do error... Aparentemente o post tá funcionando...
+                if (route == '/delete') {  
+                //quero que o reload aconteça apenas para a rota delete.
+                location.reload()
+                }
+            }, (1000))
+        }) 
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+.close_user-register__box {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.btn {
+    margin: 1rem 0;
+    box-sizing: border-box;
+    height: 2rem;
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 16px;
+    background: #8975D9;
+    color: white;
+}
+
+.btn-submit {
+    margin: 1rem;
+    padding: 0.25rem;
+    width: 20%;
+    border-radius: 4px;
+}
+
+.btn-add:hover, .btn-submit:hover {
+    background: white;
+    color: #8975D9
+}

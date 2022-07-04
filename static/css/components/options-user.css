@@ -1,0 +1,40 @@
+.options-user {
+    width: 50%;
+    height: 84px; 
+       /*84px é a soma das height dos dois span filhos.*/
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    left: 50%;
+    margin: -12.5% 0 0 -25%;
+       /*A margem é definida de acordo com o tamanho do elemento. A lógica é a mesma que foi usada na .user-register__box */
+    background: #9f8ee2;
+    color: white;
+}
+
+.options-user span {
+    display: inline-block;
+    width: 100%;
+    height: 42px;
+    background: #007BFF;
+    font-size: 1.1rem;
+    line-height: 42px;
+      /*line-height seta a altura da linha da caixa. É possível alinha o texto dessa forma.*/
+}
+
+.options-user span {
+    background: #DC3545;
+}
+
+.options-user span:first-of-type {
+    background: #007BFF;
+      /*Esse estilo sobrescreve o anterior, mas apenas para o primeiro elemento. Ou seja, aplica-se o estilo a todos span, e aqui altera um específico. Poderia ser usado o nth:child, mas parece que first-of-type tem mais compatibilidade com os browser que ele.*/
+}
+
+.options-user span:hover {
+    background: #a72431;;
+}
+
+.options-user span:first-of-type:hover {
+    background: #0859af;
+}

@@ -1,0 +1,103 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+body {
+   background: #28223f;
+   color: white;
+}
+
+.backdrop {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    margin: 2rem;
+    color: #9f8ee2;
+}
+
+.wrapper-container {
+   width: 100%;
+   height: 100%;
+   background: inherit;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+     /*É preciso colocar uma position diferente do padrão aqui, para que os elementos absolutes dentro dessa div sejam alinhados a ele não à viewport.*/
+}
+
+.users-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.user {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    width: 14rem;
+    height: 15rem;
+    margin: 1.2rem;
+    text-align: center;
+    background: #231e39;
+    box-shadow: 0 10px 20px -10px rgba(0,0,0,0.75);
+    position: relative;
+      /*position: relative para que as opções do usuário sejam alinhadas de acordo com esse elemento.*/
+}
+
+.user-pic img {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.email  {
+    font-size: 1rem;
+}
+
+.user-register__box {
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+       /*No js, esse elemento será setado como flex. Então quero que ele tenha essas propriedades.*/
+    width: 60%;
+    height: 50%;
+    background: #342C52;
+
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    margin: -25% 0 0 -30%; /*top right bottom left*/
+      /*Note que a margem é definida de acordo com o tamanho do elemento, mas não entendi como isso funciona... :/*/
+
+}
+
+.user-register__box form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

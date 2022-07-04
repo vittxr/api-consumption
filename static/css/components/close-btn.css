@@ -1,0 +1,64 @@
+.close-button{
+    width: 40px;
+    height: 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; 
+    background: rgba(0, 0, 0, 0.2);
+    right: 2%;
+    top: 4%;
+    position: absolute;
+    display: block;
+}
+
+.close-button::before, .close-button::after {
+    content: '';
+    width: 55%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    top: 48%;
+    left: 22%;
+    transform: rotate(-45deg);
+    transition: all .3s;
+}
+
+.close-button::after {
+    transform: rotate(45deg);
+}
+
+.close-button:hover::before, .close-button:hover::after {
+    transform: rotate(180deg);
+}
+
+/* .close_user-register__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: blanchedalmond;
+}
+ */
+
+/* 
+.trace {
+   display: inline-block;
+   width: 3px;
+   height: 30px;
+   background: black;
+   color: white;
+   position: absolute;
+   transition: all .5s ease;
+}
+
+.trace1 {
+    transform: rotate(45deg);
+}
+
+.trace2 {
+    transform: rotate(-45deg);
+}
+
+.trace:hover {
+    transform: rotate(180deg);
+} */
