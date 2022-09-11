@@ -6,7 +6,7 @@
   <li>O projeto possui funcionalidades de criar, deletar ou alterar um usuário</li>
   <li>Os dados da API são obtidos por request GET</li>
   <li>Os dados são armazenados em um arquivo .csv</li>
-  <li>Por causa do arquivo, é possível criar, alterar ou deletar o usuário, pois foi a única forma de eu poder controlar os dados livremente (a api obviamente não deixaria exclui-los ou alterá-los)</li>
+  <li>Por causa do arquivo, é possível criar, alterar ou deletar o usuário. Essa foi a única forma de eu poder controlar os dados livremente (a api obviamente não deixaria exclui-los ou alterá-los)</li>
 </ul>
 
 <p align="center">
